@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+      var obj1 = {
+        c: 100,
+      };
+
+      var obj2 = {
+        c: 500,
+      };
+
+      function fnAdd(x, y) {
+        console.log(x + y + this.c); //NaN
+      }
+
+      //   fnAdd.bind(obj1, 5, 5)();
+
+      //fnAdd.bind(obj1)(20, 20);
+
+      //   var fnAdd = fnAdd.bind(obj1);
+      //   fnAdd(60, 60); // 220
+
+      //   var fnAdd = fnAdd.bind(obj1, 50, 50);
+      //   fnAdd(); // 200
+
+      //Apply
+    
+      //   fnAdd.apply(obj1, [10, 10]); //
+
+      //   fnAdd.apply(obj2, [100, 100]); 
+      
+      //Call
+
+      //   fnAdd.call(obj1, 10, 20);
+
+      //   fnAdd.call(obj2, 10, 20);
+
+      //   fnAdd(10, 20); //obj1
+
+      //   fnAdd(100, 200); //obj2
+    </script>
+  </head>
+  <body></body>
+</html>

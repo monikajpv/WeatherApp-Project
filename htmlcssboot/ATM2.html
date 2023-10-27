@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> DIGITAL ATM </title>
+</head>
+<body>
+  <h1>DIGITAL ATM </h1>
+
+  <!-- Display available denominations -->
+
+  <h2>Available Denominations in the ATM are:</h2>
+  <pre id="availableDenominations"></pre>
+
+  <!-- Deposit money form -->
+  <h2>Deposit Money:</h2>
+  <form id="depositForm">
+    Denomination: <input type="number" id="depositDenomination" min="100" step="100" required>
+    Count: <input type="number" id="depositCount" min="1" required>
+    <button type="submit">Deposit</button>
+  </form>
+
+  <!-- Withdraw money form -->
+  <h2>Withdraw Money:</h2>
+  <form id="withdrawForm">
+    Amount: <input type="number" id="withdrawAmount" min="100" step="100" required>
+    <button type="submit">Withdraw</button>
+  </form>
+
+  <!-- Display withdrawal result -->
+  <h3>Withdrawal Result:</h3>
+  <pre id="withdrawalResult"></pre>
+
+  <script>
+    // Initialize the ATM with available denominations and quantities
+    const atm = {
+      2000: 0,
+      500: 0,
+      200: 0,
+      100: 0,
+    };
+
+    // Function to display available denominations
+    function displayAvailableDenominations() 
+    {
+      const denominationsList = [];
+      for (const denomination in atm)
+       {
+        denominationsList.push(`${denomination} - ${atm[denomination]} notes`);
+      }
+      document.getElementById("availableDenominations").textContent = denominationsList.join("\n");
+    }
+
+    // Function to deposit money
+    document.getElementById("depositForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const depositDenomination = parseInt(document.getElementById("depositDenomination").value);
+      const depositCount = parseInt(document.getElementById("depositCount").value);
+
+      if (isNaN(depositDenomination) || isNaN(depositCount)) {
+        displayMessage("Invalid input. Please enter valid numbers.");
+        return;
+      }
+
+      if (atm[depositDenomination]) {
+        atm[depositDenomination] += depositCount;
+        displayMessage(`Deposited ${depositCount} ${depositDenomination} notes successfully.`);
+      } else {
+        displayMessage("Invalid denomination. Deposit failed.");
+      }
+
+      displayAvailableDenominations();
+    });
+
+    // Function to withdraw money
+    document.getElementById("withdrawForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const withdrawAmount = parseInt(document.getElementById("withdrawAmount").value);
+
+      if (isNaN(withdrawAmount) || withdrawAmount % 100 !== 0) {
+        displayMessage("Invalid withdrawal amount. Amount must be in multiples of 100.");
+        return;
+      }
+
+      const withdrawal = {};
+      const denominations = [2000, 500, 200, 100];
+      let remainingAmount = withdrawAmount;
+
+      for (const denom of denominations) {
+        const numNotes = Math.min(atm[denom], Math.floor(remainingAmount / denom));
+        if (numNotes > 0) {
+          withdrawal[denom] = numNotes;
+          remainingAmount -= denom * numNotes;
+        }
+      }
+
+      if (remainingAmount === 0) {
+        let resultMessage = "Withdrawal successful:\n";
+        for (const denomination in withdrawal) {
+          resultMessage += `${denomination} - ${withdrawal[denomination]} notes\n`;
+          atm[denomination] -= withdrawal[denomination];
+        }
+        displayMessage(resultMessage);
+      } else {
+        displayMessage("Withdrawal failed. Insufficient denominations.");
+      }
+
+      displayAvailableDenominations();
+    });
+
+    // Function to display messages
+    function displayMessage(message) {
+      document.getElementById("withdrawalResult").textContent = message;
+    }
+
+    // Initial display of available denominations
+    displayAvailableDenominations();
+  </script>
+</body>
+</html>

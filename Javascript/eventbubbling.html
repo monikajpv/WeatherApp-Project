@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   
+    <link rel="stylesheet" href="eventbubble.css" />
+  </head>
+
+  <body>
+
+    <div class="Gparent">
+      <div class="parent">
+        <div class="child">
+          <button onclick="f1()">Click me</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+
+      function f1()
+       {
+        
+        alert("button is called");
+        var childRef = document.getElementsByClassName("child");
+        var parentRef = document.getElementsByClassName("parent");
+        var gparentRef = document.getElementsByClassName("Gparent");
+
+        childRef[0].addEventListener("click", f2, false);
+        parentRef[0].addEventListener("click", f3, false);
+        gparentRef[0].addEventListener("click", f4, false);
+      }
+
+      function f2() {
+        alert("Child is called");
+      }
+      function f3() {
+        alert("Parent is called");
+      }
+      function f4() {
+        alert("GParent is called");
+      }
+    </script>
+  </body>
+</html>
+
+
+

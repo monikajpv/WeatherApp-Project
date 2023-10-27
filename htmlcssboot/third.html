@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ATM Simulator</title>
+</head>
+<body>
+    <h1>ATM Simulator</h1>
+    
+    <div>
+        <h2>ATM Balance:</h2>
+        <p>Total Notes of 2000: <span id="note2000">0</span></p>
+        <p>Total Notes of 500: <span id="note500">0</span></p>
+        <p>Total Notes of 200: <span id="note200">0</span></p>
+        <p>Total Notes of 100: <span id="note100">0</span></p>
+        <p>Total Available Balance: <span id="totalBalance">0</span></p>
+    </div>
+
+    <div>
+        <h2>Deposit/Withdraw</h2>
+        <label for="amount">Enter Amount:</label>
+        <input type="number" id="amount" placeholder="Enter amount">
+        <button onclick="deposit()">Deposit</button>
+        <button onclick="withdraw()">Withdraw</button>
+    </div>
+
+    <div>
+        <h2>Transaction History</h2>
+        <ul id="transactionHistory"></ul>
+    </div>
+
+    <div>
+        <h2>Total Deposited: ₹<span id="totalDeposited">0</span></h2>
+        <h2>Total Withdrawn: ₹<span id="totalWithdrawn">0</span></h2>
+        <h2>Result: ₹<span id="result">0</span></h2>
+    </div>
+
+    <script>
+        let balance = {
+            note2000: 0,
+            note500: 0,
+            note200: 0,
+            note100: 0
+        };
+        let totalDeposited = 0;
+        let totalWithdrawn = 0;
+
+        function updateBalance() {
+            document.getElementById('note2000').innerText = balance.note2000;
+            document.getElementById('note500').innerText = balance.note500;
+            document.getElementById('note200').innerText = balance.note200;
+            document.getElementById('note100').innerText = balance.note100;
+            
+            // Calculate the total available balance
+            const totalBalance = (balance.note2000 * 2000) +
+                                (balance.note500 * 500) +
+                                (balance.note200 * 200) +
+                                (balance.note100 * 100);
+            document.getElementById('totalBalance').innerText = totalBalance;
+        }
+
+        function deposit() {
+            const amount = parseInt(document.getElementById('amount').value);
+            if (!isNaN(amount) && amount >= 0) {
+                let transaction = '';
+                let remainingAmount = amount;
+                while (remainingAmount >= 2000) {
+                    balance.note2000++;
+                    remainingAmount -= 2000;
+                }
+                while (remainingAmount >= 500) {
+                    balance.note500++;
+                    remainingAmount -= 500;
+                }
+                while (remainingAmount >= 200) {
+                    balance.note200++;
+                    remainingAmount -= 200;
+                }
+                while (remainingAmount >= 100) {
+                    balance.note100++;
+                    remainingAmount -= 100;
+                }
+                totalDeposited += amount;
+                updateBalance();
+                transaction = `Deposited: ₹${amount}`;
+                document.getElementById('transactionHistory').innerHTML += `<li>${transaction}</li>`;
+                document.getElementById('totalDeposited').innerText = totalDeposited;
+            } else {
+                alert('Please enter a valid amount for deposit.');
+            }
+        }
+
+        function withdraw() {
+            const amount = parseInt(document.getElementById('amount').value);
+            if (!isNaN(amount) && amount >= 0 && amount <= totalDeposited) {
+                let transaction = '';
+                let remainingAmount = amount;
+
+                const note2000sToWithdraw = Math.min(Math.floor(remainingAmount / 2000), balance.note2000);
+                balance.note2000 -= note2000sToWithdraw;
+                remainingAmount -= note2000sToWithdraw * 2000;
+
+                const note500sToWithdraw = Math.min(Math.floor(remainingAmount / 500), balance.note500);
+                balance.note500 -= note500sToWithdraw;
+                remainingAmount -= note500sToWithdraw * 500;
+
+                const note200sToWithdraw = Math.min(Math.floor(remainingAmount / 200), balance.note200);
+                balance.note200 -= note200sToWithdraw;
+                remainingAmount -= note200sToWithdraw * 200;
+
+                const note100sToWithdraw = Math.min(Math.floor(remainingAmount / 100), balance.note100);
+                balance.note100 -= note100sToWithdraw;
+                remainingAmount -= note100sToWithdraw * 100;
+
+                totalWithdrawn += amount;
+                totalDeposited -= amount;
+                updateBalance();
+                transaction = `Withdrawn: ₹${amount}`;
+                document.getElementById('transactionHistory').innerHTML += `<li>${transaction}</li>`;
+                document.getElementById('totalWithdrawn').innerText = totalWithdrawn;
+
+                // Calculate and display the result (subtraction of deposited from withdrawn)
+                const result = totalWithdrawn - totalDeposited;
+                document.getElementById('result').innerText = result;
+            } else {
+                alert('Please enter a valid amount for withdrawal.');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script>
+
+      function getData() 
+      {
+        var inputValue = document.querySelector("input").value;
+
+         var pRef = document.createElement("p");//get references
+         var btn = document.createElement("button");
+         var div = document.createElement("div");
+
+         btn.innerText = "Delete";
+
+         pRef.innerText = inputValue;
+
+         pRef.style.display = "inline";
+         pRef.style.marginRight = "30px";
+
+         div.appendChild(pRef);
+         div.appendChild(btn);
+
+         div.style.margin = "20px 0px";
+
+        document.querySelector("div").appendChild(div);
+
+        //Delete data
+        btn.addEventListener("click",function(){
+        pRef.remove();
+        btn.remove();
+      })
+
+      }
+    </script>
+  </head>
+  <body>
+    <div style="text-align: center; margin-top: 50px">
+      <h2>Task Assignment</h2>
+      <input type="text" placeholder="Enter Name" />
+      <button onclick="getData()">Submit</button><br />
+    </div>
+  </body>
+</html>

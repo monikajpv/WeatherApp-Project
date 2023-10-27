@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+  <head>
+    <style>
+      body {
+        height: 100vh;
+        background-color: lightgoldenrodyellow;
+      }
+      div {
+        width: 500px;
+        background-color: white;
+        text-align: center;
+        box-shadow: 0 0 10px green;
+        margin: 100px auto;
+        padding: 50px 20px;
+      }
+    </style>
+    <script>
+      function showhidepassword() 
+      {
+       var inputcoll = document.getElementsByTagName("input");
+        var btnRef = document.querySelector("button");
+
+        if(inputcoll[0]==="password")
+        {
+
+          inputcoll[0].type = "text";
+        btnRef.innerText = "Hide Password";
+
+        }
+        else
+        {
+          inputcoll[0].type = "password";
+        btnRef.innerText = "Show Password";
+
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="green">
+      <h2>Show / Hide Password</h2>
+      <input type="password" placeholder="Enter Password" />
+      <button onclick="showhidepassword()">Show Password</button>
+    </div>
+  </body>
+</html>

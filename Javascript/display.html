@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <script>
+
+      function getData() 
+      {
+        var inputValue = document.querySelector("input").value;
+
+        var pref = document.createElement("p");
+        var bref  =document.createElement("button");
+
+        pref.style.display= "inline";
+
+
+
+        pref .innerText = inputValue;
+        bref.innerText = "Delete";
+
+        document.querySelector("div").appendChild(pref);
+        document.querySelector("div").appendChild(bref);
+
+        bref.addEventListener("mouseenter",function(){
+        pref.remove();
+        bref.remove();
+
+    })
+    
+
+
+
+      }
+    </script>
+  </head>
+  <body>
+    <div>
+
+      <h2>Task Assignment</h2>
+
+      <input type="text" placeholder="Enter Name" />
+
+
+      <button onclick="getData()">Submit</button> <br />
+    </div>
+  </body>
+</html>

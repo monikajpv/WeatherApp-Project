@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        @keyframes Bgimg {
+            10%{
+                text-shadow: 30px;
+                width: 400px;
+                background-position: center;
+                background-size: contain;
+                background-repeat: none;
+            }
+            30%{
+                background-color: blueviolet;
+                background-position: center;
+                background-size: contain;
+                background-repeat: none;
+            }
+            60%{
+                height: 400px;
+                background-position: center;
+                background-repeat: none;
+
+            }
+
+            
+        }
+
+        #iv{
+            width: 500px;
+            height: 500px;
+            animation-name: Bgimg;
+            background-position: center;
+            background-repeat: none;
+            background-size: contain;
+            animation-duration: 10s;
+            animation-iteration-count: infinite;
+            animation-direction: alternate;
+            animation-delay: 5s;
+            transition-property: text;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="iv"><h1>CSS</h1>
+
+    </div>
+
+</body>
+</html>

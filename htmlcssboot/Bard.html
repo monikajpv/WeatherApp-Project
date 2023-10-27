@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ATM Denomination Program with Transaction History</title>
+</head>
+<body>
+
+  <h1>ATM Denomination Program with Transaction History</h1>
+
+  <div id="atm">
+    <input type="number" id="deposit-amount" placeholder="Enter amount to deposit">
+    <button type="button" id="deposit-button">Deposit</button>
+
+    <input type="number" id="withdraw-amount" placeholder="Enter amount to withdraw">
+    <button type="button" id="withdraw-button">Withdraw</button>
+
+    <div id="balance">
+      <h3>Current Balance</h3>
+      <p id="total-deposit">Total Deposit: ₹0</p>
+      <p id="total-withdraw">Total Withdraw: ₹0</p>
+    </div>
+
+    <div id="transaction-history">
+      <h3>Transaction History</h3>
+      <ul id="transaction-list"></ul>
+    </div>
+  </div>
+
+  <script>
+    // Initialize the number of notes
+    const notes = {
+      2000: 0,
+      500: 0,
+      200: 0,
+      100: 0,
+    };
+
+    // Initialize the transaction history
+    const transactionHistory = [];
+
+    // Update the total deposit and withdraw
+    function updateBalance() {
+      const totalDeposit = Object.values(notes).reduce((acc, curr) => acc + curr * curr, 0);
+      const totalWithdraw = transactionHistory.reduce((acc, curr) => acc + curr.amount, 0);
+
+      document.getElementById('total-deposit').textContent = `Total Deposit: ₹${totalDeposit}`;
+      document.getElementById('total-withdraw').textContent = `Total Withdraw: ₹${totalWithdraw}`;
+    }
+
+    // Add a transaction to the transaction history
+    function addTransaction(type, amount) {
+      transactionHistory.push({
+        type,
+        amount,
+        date: new Date(),
+      });
+
+      updateBalance();
+    }
+
+    // Deposit money
+    document.getElementById('deposit-button').addEventListener('click', () => {
+      const depositAmount = parseInt(document.getElementById('deposit-amount').value);
+
+      // Update the number of notes
+      for (const denomination of Object.keys(notes)) {
+        notes[denomination] += Math.floor(depositAmount / denomination);
+        depositAmount %= denomination;
+      }
+
+      // Add a deposit transaction to the transaction history
+      addTransaction('deposit', depositAmount);
+    });
+
+    // Withdraw money
+    document.getElementById('withdraw-button').addEventListener('click', () => {
+      const withdrawAmount = parseInt(document.getElementById('withdraw-amount').value);
+
+      // Check if there is enough balance
+      if (withdrawAmount > Object.values(notes).reduce((acc, curr) => acc + curr * curr, 0)) {
+        alert('Insufficient balance');
+        return;
+      }
+
+      // Update the number of notes
+      for (const denomination of Object.keys(notes)) {
+        notes[denomination] -= Math.floor(withdrawAmount / denomination);
+        withdrawAmount %= denomination;
+      }
+
+      // Add a withdraw transaction to the transaction history
+      addTransaction('withdraw', withdrawAmount);
+    });
+
+    // Display the transaction history
+    function displayTransactionHistory() {
+      const transactionList = document.getElementById('transaction-list');
+
+      transactionList.innerHTML = '';
+
+      for (const transaction of transactionHistory) {
+        const transactionItem = document.createElement('li');
+        transactionItem.textContent = `${transaction.type} ₹${transaction.amount} on ${transaction.date.toLocaleDateString()}`;
+
+        transactionList.appendChild(transactionItem);
+      }
+    }
+
+    // Display the initial balance and transaction history
+    displayTransactionHistory();
+  </script>
+
+</body>
+</html>

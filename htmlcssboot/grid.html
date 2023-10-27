@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<head>
+    <title>Grid Layouts</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: grid;
+
+            grid-template-rows:100px 1fr 90px;
+            grid-template-columns: 300px 1fr;
+
+            grid-template-areas:
+                "header header"S
+                "aside main"
+                "footer footer";
+            min-height: 100vh;
+        }
+
+        header {
+            grid-area: header;
+            background-color: #3467f3;
+            color: white;
+            text-align: center;
+        }
+
+        aside {
+            background-color: #e7dcdc;
+            padding: 30px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        footer {
+            display:grid;
+            justify-content: center;
+            grid-template-columns: 200px 200px;
+            grid-area: footer;
+            background-color: #050505;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>WELCOME TO EXCELR TRAINING PROGRAM</h1>
+    </header>
+    <aside>
+        <h2>Our Courses</h2>
+        <ul>
+            <li>Java Full Stack</li>
+            <li>Data Science</li>
+            <li>Automation Testing</li>
+            <li>Amazon Web Services</li>
+            <li>AI and Deep Learning</li>
+            <li>Internet Of Things</li>
+        </ul>
+        
+            <h2>Our Clients</h2>
+        <ul>
+            <li>IBM</li>
+            <li>ORACLE</li>
+            <li>METRO</li>
+            <li>INVESCO</li>
+            <li>INFOSYS</li>
+            <li>HSBC</li>
+        </ul>
+        
+    </aside>
+    <main>
+        <h2>Global Leaders In Training</h2>
+        <p>ExcelR is a global leader delivering a wide gamut of management and technical training over 40 countries. We are a trusted training delivery partner of 400+ corporate clients and universities/educational institutions across the globe with 150,000+ professionals trained across various courses. ExcelR helps individuals and organizations to excel by providing courses based on practical knowledge and theoretical concepts. Our industry reputation speaks for itself. We offer the best value in training services combined with the support of our creative minds to establish a solution that suits your learning needs. We just don’t train, we help in building careers and shaping up the future leaders</p>
+        
+        <h2>10+ years of Experience</h2>
+        <h4>We Don't Just Train, We Build Careers !!</h4>
+        <p>As a new-age training institute and with a global footprint, we at ExcelR understand the constantly changing nature of  the business and emerging needs across the globe. Keeping industry skill requirements in mind, we offer a wide gamut of technical and management courses as well as courses in emerging technologies. The curriculum of each course has been meticulously designed to match the contemporary needs of the industry. We offer different levels of courses from beginner to advanced, ensuring that we meet the talent requirements of both students and working professionals. Our courses aim to prepare students for future advancements in technology, strategic thinking and planning, ensuring that they are future-ready and build a lucrative career ahead.</p>
+    
+    </main>
+    <footer>
+        <p>Drop a Query </p>
+        <p>Contact</p>
+        
+    </footer>
+</body>
+</html>
