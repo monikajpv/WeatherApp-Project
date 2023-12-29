@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="adduser">
+        <input type="text" placeholder="add users" name="in" [(ngModel)]="username"/>&nbsp;
+        <select [(ngModel)]="status">
+            <option >Active</option>
+            <option >Inactive</option>
+          </select>&nbsp;
+          <button (click)="Adduser()">
+            Create User
+          </button>&nbsp;
+          <button (click)="Deleteuser()">
+            Delete User
+          </button>
+    </div>
+
+
+    <div class="userdiv" *ngFor="let user of users" >
+        <div class="usern">{{user.name}}</div>
+        <div class="users">{{user.status}}</div>
+    </div>
+</div>

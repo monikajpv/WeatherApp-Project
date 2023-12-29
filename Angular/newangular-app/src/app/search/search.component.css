@@ -1,0 +1,10 @@
+
+
+input [type=text]{
+    width:250px;
+    height: 30px;
+    margin-left: 20px;
+}
+.chng{
+    background-color: rgb(221, 162, 53);
+}

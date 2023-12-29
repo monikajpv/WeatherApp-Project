@@ -1,0 +1,9 @@
+<div class="searchdiv" [ngClass]="{chng:searchValue!=''}">
+    <span><b>Search:</b></span>
+    <!-- <input type="text" (input)="change($event)"> -->
+    <!-- Two way Binding -->
+    <input type="text" [(ngModel)]="searchValue" >
+    <span *ngIf="searchValue!='' ">"You Searched:" {{searchValue}}</span>
+
+
+</div>

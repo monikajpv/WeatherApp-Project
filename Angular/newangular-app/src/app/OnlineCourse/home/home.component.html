@@ -1,0 +1,32 @@
+<div *ngFor = "let s of title">
+    <div id="firstd">{{s.header}}</div>
+    <div class="secondd">{{s.name}}</div>   
+</div>
+
+<div class="maincontainer">
+<div  class ="scc"  *ngFor = "let c of courses">
+    
+    <div class="description">
+     <div class="data"> <img [src]="c.image" width="300px" height="200px"> </div>
+
+    <div id="coursef"><h2> {{c.topic}}</h2> </div>
+    <div class="courses">{{c.desc}}</div> 
+    <div class="courseth">{{c.pre}}</div>  
+    <div class="courseth">{{c.cost}}</div> 
+    <div class="courseth"><button (click)="onEnroll()" >{{c.dis}}</button></div>  
+   </div>
+
+   <div>
+    <div class="description">
+    <div class="data"> <img [src]="c.image" width="300px" height="200px"> </div>
+    <div id="coursef"><h2> {{c.topic}}</h2> </div>
+    <div class="courses">{{c.desc}}</div> 
+    <div class="courseth">{{c.pre}}</div>  
+    <div class="courseth">{{c.cost}}</div> 
+    <div class="courseth"><button>{{c.dis}}</button></div>  
+   </div> 
+   </div>
+
+
+</div>
+</div>

@@ -1,0 +1,27 @@
+<!-- <div *ngFor ="let item of [1,3,5]">
+      <p> Number is : {{item}}</p>
+</div> -->
+<div *ngFor = "let p of products"> <!--ngFor directive-->
+
+<div class="prod" [ngStyle]="{backgroundColor:p.available=='Available' ? 'lightGreen' : 'pink'}"> <!-- ngstyle directive-->
+    <div class="imgcont"><img [src]="p.image" height="100" width="100"></div>
+    <div>
+        <div class="container"><h2>{{p.name}}</h2></div>
+        <div class="detailContainer">
+           <div class="cont" [ngStyle]="{color:p.available=='Available' ? 'Green' : 'Red'}">{{p.available}}</div>&nbsp;&nbsp;
+           <div class="cont">{{p.price}}</div>&nbsp;&nbsp; 
+          <div class="cont">{{p.color}}</div>&nbsp;&nbsp;
+        </div>
+   </div>
+
+    <div class="options">
+    <button >Show Details</button> &nbsp;
+    <button *ngIf="p.available=='Available'; else ntf ">Buy Now</button>
+    <ng-template #ntf>
+        <button >Notify Me</button> &nbsp;
+
+    </ng-template>
+   </div>
+
+</div>
+</div>
